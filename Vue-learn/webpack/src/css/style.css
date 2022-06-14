@@ -1,0 +1,6 @@
+
+/* css打包成一个模块，打包到bundel.js中 */
+body{
+    background: url(../image/image.png);
+    height: 100vh;
+}

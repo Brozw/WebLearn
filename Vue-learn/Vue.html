@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue</title>
+  </head>
+  <body>
+    <!-- 父组件模板 -->
+    <div id="app">
+      <h2>标题</h2>
+      <!-- 通过slot.的方式获取子组件的language -->
+      <cpnc1>
+        <template slot-scope="slot">
+          <div>
+            <!-- <span v-for="item in slot.data">{{item}} * </span> -->
+            <span>{{slot.data.join('-')}}</span>
+          </div>
+        </template>
+      </cpnc1>
+    </div>
+
+    <template id="cpnc1">
+      <div>
+        <!-- data是一个随便的名字，目的是获取子组件数据 -->
+        <slot :data="languages">
+          <ul>
+            <li v-for="item in languages">{{item}}</li>
+          </ul>
+        </slot>
+      </div>
+    </template>
+
+    <script src="/vue.js"></script>
+    <script>
+
+      //子组件
+      const cpnc1 = {
+        template: '#cpnc1',
+        data(){
+          return{
+            languages:['javascript','C++','C#']
+          }
+        }
+      };
+
+      //根组件
+      const app = new Vue({
+        el: '#app',
+        components: {
+          cpnc1
+        }
+      });
+    </script>
+  </body>
+</html>
